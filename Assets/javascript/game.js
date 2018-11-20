@@ -35,6 +35,7 @@ function startGame() {
 document.onkeyup = function (event) {
     userGuesses = event.key;
 
+
     // logiccccc
     // if the letter pressed is within the array word
     //  
@@ -44,6 +45,7 @@ document.onkeyup = function (event) {
         for (var i = 0; i < randWord.length; i++) {
             if (randWord[i] === userGuesses) {
                 underScores[i] = userGuesses;
+                userGuesses.textContent = document.getElementById("visualWord");
                 console.log(underScores);
                 
                 
@@ -51,18 +53,22 @@ document.onkeyup = function (event) {
         }
     }
     // if the letter doesnt exist then you push towards the wrong letter array
-    else if (randWord[i] ===  randWord[i]) {
+    else {
         wrongLetter.push(userGuesses);
         guessesLeft--;
+        document.getElementById("guesses-left").textContent= guessesLeft;
+        document.getElementById("wrongLetter").textContent= userGuesses;
+        for( var i=0; i< randWord.length; i++) {
+            if(guessesLeft=== 0){
+                alert("fuck.");
+                break;
+            }
+        }
 
         console.log(wrongLetter);
         console.log(guessesLeft);
     }
-    function winLose(){
-        if (guessesLeft === 0){
-            alert("loser");
-        }
-    }
+    
     
 }
 // Main
