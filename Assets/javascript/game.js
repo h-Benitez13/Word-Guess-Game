@@ -1,9 +1,8 @@
-// create the word options
 // create the array for when the wrong letter was pressed
 // create the variable for total number of lives
 // create the array for the underscore placeholders
 // create an array for the userGuesses (specifically the onkey )
-var wordBank = ["nuggets", "fries", "mcflurry", "soda"]
+var wordBank = ["nuggets", "fries", "mcflurry", "soda", "cheeseburger"]
 var wrongLetter = [];
 var guessesLeft = 9;
 var underScores = [];
@@ -16,6 +15,8 @@ var remainingLetters = [];
 // function
 // ==================
 function startGame() {
+    // storing the words, empty it out 
+    document.getElementById("visualWord").textContent = "";
     // picks random word
     randWord = wordBank[Math.floor(Math.random() * wordBank.length)];
     // to show what the random word is and guess correctly
@@ -25,28 +26,28 @@ function startGame() {
 
     // create a loop so every time a random word is chosen
     // the underscores are pushed onto the page with the amount of underscores need to create the word
+    underScores = [];
+    // create the word options
     for (var i = 0; i < randWord.length; i++) {
         underScores.push("_ ");
         // if( underScores.push("_ ")=== randWord){
         //     console.log("win");
         // }
-        
 
 
-    }  
+
+
+
+    }
 
     // var remainingLetters = randWord.length;
     // console.log(remainingLetters);
 
-    
+
     // printing underScores to the screen
 
     document.getElementById("visualWord").textContent = underScores.join("");
     console.log(underScores);
-
-    // reset whenever we start the game
-    wrongLetter = [];
-    guessesLeft = 9;
 
 
     // PRINT ON THE SCREEN
@@ -74,28 +75,34 @@ document.onkeyup = function (event) {
                 // prints the userGuesses onto the underscore it belongs too (if its in the word)
                 // create an array for the randomized word chosen in the wordBank
                 document.getElementById("visualWord").textContent = underScores.join(" ");
-                
+
                 remainingLetters++;
                 document.getElementById("remainingLetters").textContent = "letters guessed correctly: " + remainingLetters;
                 console.log(randWord.length);
-           
-                console.log(underScores);
                 
-            }if(remainingLetters === randWord.length){
-                alert("do a little dance ;)");
-                randWord[i];
-
+                
+                console.log(underScores);
+                console.log(randWord);
+                
+                
+            } 
+            if (remainingLetters == randWord.length) {
+                
+                alert("Congrats bud, you did it!" + " You ordered " + randWord);
+                // reset the letters used
+                remainingLetters = [];
+                document.getElementById("remainingLetters").textContent = "letters guessed correctly: " + remainingLetters;
+                //  empty the letters used
+                wrongLetter = [];
+                // reset the lives for the user
+                guessesLeft = 9;
+                
+                startGame();
+                
             }
             
-            // while (remainingLetters > 0 ){
-            //     for(var i= 0; i < randWord.length; i++){
-            //         if (randWord[i]=== userGuesses){
-            //             remainingLetters--;
-            //             console.log(remainingLetters);
-            //         }
-            //     }
-            // }
-        
+            
+
         }
         
     }
@@ -132,7 +139,15 @@ document.onkeyup = function (event) {
             //  empty the letters used
             wrongLetter = [];
             // reset the lives for the user
-            guessesLeft = 10;
+            guessesLeft = 9;
+            // reset the letters used
+            remainingLetters = [];
+            document.getElementById("remainingLetters").textContent = "letters guessed correctly: " + remainingLetters;
+
+
+            // resets the game when loose
+            //try to make sure the underscores are empty
+            startGame();
 
         }
 
