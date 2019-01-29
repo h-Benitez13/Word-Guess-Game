@@ -1,165 +1,164 @@
-// create the array for when the wrong letter was pressed
-// create the variable for total number of lives
-// create the array for the underscore placeholders
-// create an array for the userGuesses (specifically the onkey )
-var wordBank = ["nuggets", "fries", "mcflurry", "soda", "cheeseburger"]
-var wrongLetter = [];
-var guessesLeft = 9;
-var underScores = [];
-var userGuesses = [];
-var randWord = [];
-var remainingLetters = [];
+document.addEventListener("DOMContentLoaded", function () {
+    $("#myModal").modal("show");
+
+    // GLOBAL VARIABLES (accessible by all functions)
+    // ==================================================================================================
+
+    // Array of Word Options (all lowercase)
+    var wordsList = ["nuggets", "fries", "mcflurry", "soda"];
+    // Solution will be held here.
+    var chosenWord = "";
+    // This will break the solution into individual letters to be stored in array.
+    var lettersInChosenWord = [];
+    // This will be the number of blanks we show based on the solution
+    var numBlanks = 0;
+    // Holds a mix of blank and solved letters (ex: 'n, _ _, n, _').
+    var blanksAndSuccesses = [];
+    // Holds all of the wrong guesses
+    var wrongGuesses = [];
+
+    // Game counters
+    var winCounter = 0;
+    var lossCounter = 0;
+    var numGuesses = 9;
+
+    // FUNCTIONS (These are bits of code that we will call upon to run when needed)
+    // =========================================================================================
+
+    // startGame()
+    // Its how we we will start and restart the game.
+    // (Note: It's not being run here. It's just being made for future use.)
+    function startGame() {
+        // Reset the guesses back to 0.
+        numGuesses = 9;
+
+        // Solution is chosen randomly from wordList.
+        chosenWord = wordsList[Math.floor(Math.random() * wordsList.length)];
+        // The word is broken into individual letters.
+        lettersInChosenWord = chosenWord.split("");
+        // We count the number of letters in the word.
+        numBlanks = lettersInChosenWord.length;
+
+        // We print the solution in console (for testing).
+        console.log(chosenWord);
+
+        // CRITICAL LINE - Here we *reset* the guess and success array at each round.
+        blanksAndSuccesses = [];
+        // CRITICAL LINE - Here we *reset* the wrong guesses from the previous round.
+        wrongGuesses = [];
+
+        // Fill up the blanksAndSuccesses list with appropriate number of blanks.
+        // This is based on number of letters in solution.
+        for (var i = 0; i < numBlanks; i++) {
+            blanksAndSuccesses.push("_");
+        }
+
+        // Print the initial blanks in console.
+        console.log(blanksAndSuccesses);
 
 
+        // Reprints the guessesLeft to 9
+        document.getElementById("guesses-left").innerHTML = numGuesses;
 
-// function
-// ==================
-function startGame() {
-    // storing the words, empty it out 
-    document.getElementById("visualWord").textContent = "";
-    // picks random word
-    randWord = wordBank[Math.floor(Math.random() * wordBank.length)];
-    // to show what the random word is and guess correctly
-    console.log("random word =" + randWord);
-    var remainingLetters = randWord.length;
-    console.log(remainingLetters);
+        // Prints the blanks at the beginning of each round in the HTML
+        document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(" ");
 
-    // create a loop so every time a random word is chosen
-    // the underscores are pushed onto the page with the amount of underscores need to create the word
-    underScores = [];
-    // create the word options
-    for (var i = 0; i < randWord.length; i++) {
-        underScores.push("_ ");
-        // if( underScores.push("_ ")=== randWord){
-        //     console.log("win");
-        // }
-
-
-
-
-
+        // Clears the wrong guesses from the previous round
+        document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
     }
 
-    // var remainingLetters = randWord.length;
-    // console.log(remainingLetters);
+    // checkLetters() function
+    // It's where we will do all of the comparisons for matches.
+    // Again, it's not being called here. It's just being made for future use.
+    function checkLetters(letter) {
 
+        // This boolean will be toggled based on whether or not a user letter is found anywhere in the word.
+        var letterInWord = false;
 
-    // printing underScores to the screen
-
-    document.getElementById("visualWord").textContent = underScores.join("");
-    console.log(underScores);
-
-
-    // PRINT ON THE SCREEN
-    document.getElementById("guesses-left").textContent = guessesLeft;
-    document.getElementById("wrongLetter").textContent = wrongLetter;
-
-}
-
-// capture the users input
-document.onkeyup = function (event) {
-    userGuesses = event.key;
-
-
-    // logiccccc
-    // if the letter pressed is within the array word
-    //  
-    if (randWord.indexOf(userGuesses) > -1) {
-        // if the letter exist inside the word
-        // then put in the underscore
-        for (var i = 0; i < randWord.length; i++) {
-            if (randWord[i] === userGuesses) {
-                // sets the underscores the same as the userguesses
-                underScores[i] = userGuesses;
-
-                // prints the userGuesses onto the underscore it belongs too (if its in the word)
-                // create an array for the randomized word chosen in the wordBank
-                document.getElementById("visualWord").textContent = underScores.join(" ");
-
-                remainingLetters++;
-                document.getElementById("remainingLetters").textContent = "letters guessed correctly: " + remainingLetters;
-                console.log(randWord.length);
-                
-                
-                console.log(underScores);
-                console.log(randWord);
-                
-                
-            } 
-            if (remainingLetters == randWord.length) {
-                
-                alert("Congrats bud, you did it!" + " You ordered " + randWord);
-                // reset the letters used
-                remainingLetters = [];
-                document.getElementById("remainingLetters").textContent = "letters guessed correctly: " + remainingLetters;
-                //  empty the letters used
-                wrongLetter = [];
-                // reset the lives for the user
-                guessesLeft = 9;
-                
-                startGame();
-                
+        // Check if a letter exists inside the array at all.
+        for (var i = 0; i < numBlanks; i++) {
+            if (chosenWord[i] === letter) {
+                // If the letter exists then toggle this boolean to true. This will be used in the next step.
+                letterInWord = true;
             }
-            
-            
-
         }
-        
+
+        // If the letter exists somewhere in the word, then figure out exactly where (which indices).
+        if (letterInWord) {
+
+            // Loop through the word.
+            for (var j = 0; j < numBlanks; j++) {
+
+                // Populate the blanksAndSuccesses with every instance of the letter.
+                if (chosenWord[j] === letter) {
+                    // Here we set the specific space in blanks and letter equal to the letter when there is a match.
+                    blanksAndSuccesses[j] = letter;
+                }
+            }
+            // Logging for testing.
+            console.log(blanksAndSuccesses);
+        }
+        // If the letter doesn't exist at all...
+        else {
+            // ..then we add the letter to the list of wrong letters, and we subtract one of the guesses.
+            wrongGuesses.push(letter);
+            numGuesses--;
+        }
     }
-    // if the letter doesnt exist then you push towards the wrong letter array
-    else {
-        wrongLetter.push(userGuesses);
-        // minus 1 the amount of lives the user has
-        guessesLeft--;
 
-        // set the wrongLetter index equal to the key pressed by the user
-        wrongLetter[i] = userGuesses;
+    // roundComplete() function
+    // Here we will have all of the code that needs to be run after each guess is made
+    function roundComplete() {
 
-        // this prints the amount of lives the users has left
-        document.getElementById("guesses-left").textContent = guessesLeft;
+        // First, log an initial status update in the console telling us how many wins, losses, and guesses are left.
+        console.log("WinCount: " + winCounter + " | LossCount: " + lossCounter + " | NumGuesses: " + numGuesses);
 
-        // this prints the letters used that were wrong 
-        document.getElementById("wrongLetter").textContent = wrongLetter.join(",");
+        // Update the HTML to reflect the new number of guesses. Also update the correct guesses.
+        document.getElementById("guesses-left").innerHTML = numGuesses;
+        // This will print the array of guesses and blanks onto the page.
+        document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(" ");
+        // This will print the wrong guesses onto the page.
+        document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
 
-    }
-    // creating a loop for when the user attempts reaches zero
-    // you technically end the game 
-    // and then reset to the start
+        // If we have gotten all the letters to match the solution...
+        if (lettersInChosenWord.toString() === blanksAndSuccesses.toString()) {
+            // ..add to the win counter & give the user an alert.
+            winCounter++;
+            $("#Winner").modal("show");
 
-    // the loops starts with 0 so the alert only goes off onces but it repeats every new game
-    // rather than increase, it decreases with the userLIves (starts off at 9 for me)
-    for (var i = 0; i > -1; i--) {
-
-        // if the guessesLeft IS the number -1
-        if (guessesLeft == 0) {
-
-            // show up as "fuck."
-            alert("YOU LOSE! muaaahahahahahahaha!");
-
-            //  empty the letters used
-            wrongLetter = [];
-            // reset the lives for the user
-            guessesLeft = 9;
-            // reset the letters used
-            remainingLetters = [];
-            document.getElementById("remainingLetters").textContent = "letters guessed correctly: " + remainingLetters;
-
-
-            // resets the game when loose
-            //try to make sure the underscores are empty
+            // Update the win counter in the HTML & restart the game.
+            document.getElementById("win-counter").innerHTML = winCounter;
             startGame();
-
         }
 
-        console.log(wrongLetter);
-        console.log(guessesLeft);
+        // If we've run out of guesses..
+        else if (numGuesses === 0) {
+            // Add to the loss counter.
+            lossCounter++;
+            // Give the user an alert.
+            $("#Loser").modal("show");
+
+            // Update the loss counter in the HTML.
+            document.getElementById("loss-counter").innerHTML = lossCounter;
+            // Restart the game.
+            startGame();
+        }
+
     }
 
+    // MAIN PROCESS (THIS IS THE CODE THAT CONTROLS WHAT IS ACTUALLY RUN)
+    // ==================================================================================================
 
-}
+    // Starts the Game by running the startGame() function
+    startGame();
 
-
-
-// Main
-// ==========================================
-startGame();
+    // Then initiate the function for capturing key clicks.
+    document.onkeyup = function (event) {
+        // Converts all key clicks to lowercase letters.
+        var letterGuessed = String.fromCharCode(event.which).toLowerCase();
+        // Runs the code to check for correctness.
+        checkLetters(letterGuessed);
+        // Runs the code after each round is done.
+        roundComplete();
+    };
+});
