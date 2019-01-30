@@ -1,0 +1,60 @@
+
+.jumbotron {
+    height: 900px;
+    background-image: url("../images/green-307835__340.png");
+    background-size: 1440px 900px;
+    background-repeat: no-repeat;
+    
+}
+.display-4, .lead {
+    color: white;
+}
+.lead{
+    font-size: 15px;
+    font-family: Game;
+}
+
+.display-4{
+    font-size: 170px;
+    font-family: Hang-man;
+
+}
+hr{
+    border: solid white 2px;
+}
+@font-face{
+font-family:  Hang-Man;
+src: url("../images/vtks\ chalk\ 79.ttf");
+}
+
+@font-face{
+    font-family: Game;
+    src: url("../images/Neat\ Chalk.ttf");
+}
+
+.card, .card-header {
+    color: white;
+    font-family: Game;
+    border: transparent;
+    
+}
+.setting {
+    margin-top: 3%;
+}
+
+#Winner {
+    background-image: url("../images/fireworks.gif");
+    background-size: cover; 
+    background-repeat: no-repeat;
+    color: white;
+}
+
+#Loser{
+    color: white;
+    background-color: black;
+    background-image: url("../images/loser.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+

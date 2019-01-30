@@ -12,114 +12,177 @@
     <!-- Bootstrap is used to make game look nicer -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
         crossorigin="anonymous">
+    <!-- local css -->
+    <link rel="stylesheet" href="Assets/css/style.css">
 </head>
 
 <body>
-    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button> -->
 
-    <div id="myModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                Welcome to WHEEL OF FORTUNE!!
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLongTitle">Wheel of Fortune!</h1>
+
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4><strong>Sorry, but it's not wheel of fortune</strong></h4>
+
+
+                    <p>
+                        Welcome to the classic game of <strong>Hang-Man.</strong>
+                        <hr>
+                        <h3>Instructions</h3>
+                        <hr>
+                        The theme of this Hang-Man game is "Fast-food menu items". <br>
+                        <br>
+                        Starting off with Mcdonald's ice cream (not a hint, our machine is broke), following
+                        Taco Bell, Chick-fil-A, Jack-in-the-Box, and Shake-Shack<br>
+                        <br>
+                        Every round, a random word populates and is displayed below the
+                        <strong>Words to Guess</strong>. You push away on the keys on your keyboard,
+                        but be warned, every round you only have <strong>9 attempts</strong> to guess correctly.<br>
+                        <br>
+                        You guess the word right: you gain a point<br>
+                        <br>
+                        ....but if you guess <strong>INCORRECTLY</strong> then you tally a loss<br>
+                        <br>
+                        <h4>Nothing too crazy or out of the box just the classic game we all love!</h4>
+                        <h2>ENJOY!</h2>
+
+                    </p>
+                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-    <div id="Winner" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+
+    <div id="Winner" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <h1>WINNER</h1>
+            <div class="bg-transparent modal-content">
+                <div class="text-center modal-header">
+                        <h1 class="modal-title" id="exampleModalLongTitle">WINNER!</h1>
+                    </div>
+                <div class="text-center modal-body">
+                    <img src="Assets/images/winner.gif" alt="" style="width: 500px; height: 400px;"><br>
+                    <br>
+                    <h3><stron>YOU DID IT!</stron></h3>
+                    <br>
+                    <p>
+                        Now, that you've succeed, here comes the best part!<br>
+                        <br>
+                        <h2>You can play again...F-O-R-E-V-E-R!</h2>
+                    </p>
+                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div id="Loser" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <h1>LOSER</h1>
+            <div class="bg-transparent modal-content">
+                <div class="text-center modal-header">
+                        <h1 class="modal-title" id="exampleModalLongTitle">Sorry bud, better luck next time!</h1>
+                </div>
+                <div class="text-center modal-body">
+                    <img src="Assets/images/game-over.gif" alt="" style="width: 500px; height: 400px; margin-left: 30px;"><br>
+                    <br>
+                    <h2><strong>Unfortunately...</strong>this is the end of the road for you</h2><br>
+                    <br>
+                    <h4>But you know what! Click the <strong>Close</strong> button and give it another go!</h4>
+                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap Container will hold everything -->
-    <div class="container">
-        <!-- Jumbotron holds the title section -->
-        <div class="jumbotron">
-            <div class="container">
-                <h1>Word Guess</h1>
-                <h2>WE TALKIN ABOUT FOOOOOD!</h2>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container text-center">
+            <h1 class="display-4 ">Hang-Man</h1>
+            <p class="lead"> WE TALKIN ABOUT FOOOOOD!
                 <small>Click any letter to begin...</small>
-            </div>
-        </div>
+            </p>
+            <hr>
 
-        <!-- Game counters all held here. cards are being used to hold various sections. -->
-        <div class="row">
-            <div class="col-lg-12">
+            <!-- Game counters all held here. cards are being used to hold various sections. -->
+            <div class="row setting ">
+                <div class="col-lg-12">
 
-                <!-- First card: Holds the Word to Guess (blanks and guessed word) -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title"><strong>Word to Guess</strong></h3>
+                    <!-- First card: Holds the Word to Guess (blanks and guessed word) -->
+                    <div class="bg-transparent card">
+                        <div class="card-header" style="border: transparent;">
+                            <h3 class="card-title"><strong>Words to Guess:</strong></h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- This h3 section called wordblanks is what we'll be replacing with letters as the user guesses.
+                            Pay particular attention to the id called ***wordblanks***. We'll be referencing this in the JavaScript. -->
+                            <h3 id="word-blanks">_ _ _ _ _</h3>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <!-- This h3 section called wordblanks is what we'll be replacing with letters as the user guesses.
-						Pay particular attention to the id called ***wordblanks***. We'll be referencing this in the JavaScript. -->
-                        <h3 id="word-blanks">_ _ _ _ _ _ _ _ _ </h3>
+
+                    <!-- Second card: Holds the list of Wrong User Guesses. -->
+                    <div class="bg-transparent card">
+                        <div class="card-body">
+
+                            <!-- This span section called userGuesses is where we will be dumping the wrong guesses.
+                            Pay particular attention to the id called ****userGuesses***. We'll be referencing this in the JavaScript. -->
+                            <strong>Wrong Guesses: </strong> <span id="wrong-guesses"></span>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Second card: Holds the list of Wrong User Guesses. -->
-                <div class="card">
-                    <div class="card-body">
+                    <!-- Third card: Holds the Number of Wrong Guesses -->
+                    <div class="bg-transparent card">
+                        <div class="card-body">
 
-                        <!-- This span section called userGuesses is where we will be dumping the wrong guesses.
-						Pay particular attention to the id called ****userGuesses***. We'll be referencing this in the JavaScript. -->
-                        <strong>Wrong Guesses: </strong> <span id="wrong-guesses"></span>
+                            <!-- This span called guessesLeft is where we will be dumping the number of guesses left.
+                            Pay attention to the id called ****guessesLeft****. We'll be referencing this in the JavaScript. -->
+                            <strong>Guesses Left: </strong> <span id="guesses-left">9</span>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Third card: Holds the Number of Wrong Guesses -->
-                <div class="card">
-                    <div class="card-body">
+                    <!-- Fourth card: Holds the number of Wins. -->
+                    <div class="bg-transparent card">
+                        <div class="card-body">
 
-                        <!-- This span called guessesLeft is where we will be dumping the number of guesses left.
-						Pay attention to the id called ****guessesLeft****. We'll be referencing this in the JavaScript. -->
-                        <strong>Guesses Left: </strong> <span id="guesses-left">9</span>
+                            <!-- This span called winCounter is where we'll be dumping the number of wins.
+                            Pay attention to the id called ****winCounter***. We'll be referencing this in the JavaScript. -->
+                            <strong>Wins: </strong> <span id="win-counter">0</span>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Fourth card: Holds the number of Wins. -->
-                <div class="card">
-                    <div class="card-body">
+                    <!-- Fifth card: Holds the number of Losses. -->
+                    <div class="bg-transparent card">
+                        <div class="card-body">
 
-                        <!-- This span called winCounter is where we'll be dumping the number of wins.
-						Pay attention to the id called ****winCounter***. We'll be referencing this in the JavaScript. -->
-                        <strong>Wins: </strong> <span id="win-counter">0</span>
-                    </div>
-                </div>
-
-                <!-- Fifth card: Holds the number of Losses. -->
-                <div class="card">
-                    <div class="card-body">
-
-                        <!-- This span called winCounter is where we'll be dumping the number of wins.
-						Pay attention to the id called ****winCounter***. We'll be referencing this in the JavaScript. -->
-                        <strong>Losses: </strong> <span id="loss-counter">0</span>
+                            <!-- This span called winCounter is where we'll be dumping the number of wins.
+                            Pay attention to the id called ****winCounter***. We'll be referencing this in the JavaScript. -->
+                            <strong>Losses: </strong> <span id="loss-counter">0</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+
+
+
+
+
 
     <!-- Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -5,7 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // ==================================================================================================
 
     // Array of Word Options (all lowercase)
-    var wordsList = ["nuggets", "fries", "mcflurry", "soda"];
+    var wordsList = ["nuggets", "fries", "mcflurry", "soda", "applepie",
+        "dorritos tacos", "chicken sandwich", "curly fries", "baja blast", "big mac"
+    ];
     // Solution will be held here.
     var chosenWord = "";
     // This will break the solution into individual letters to be stored in array.
